@@ -1,0 +1,12 @@
+ create or replace function intsum(p number, R number, T number) return number is intrest number;
+ Begin
+intrest:=(p*r*t)/100; 
+ return intrest;
+ END;
+ /
+
+ select intsum(10000,2,5) from dual;
+
+ select intsum(15000,5,4) from dual;
+
+ select intsum(20000,4,6) from dual;

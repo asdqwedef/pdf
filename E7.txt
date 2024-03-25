@@ -1,0 +1,26 @@
+CREATE TYPE StudentObj AS OBJECT (
+    firstname VARCHAR2(50),
+    fathername VARCHAR2(50),
+    mothername VARCHAR2(50),
+    MEMBER FUNCTION getAge RETURN NUMBER
+);
+/
+CREATE OR REPLACE TYPE BODY StudentObj AS
+    MEMBER FUNCTION getAge RETURN NUMBER IS
+    BEGIN
+        RETURN 20;
+    END;
+END;
+/
+
+DECLARE
+    student StudentObj;
+BEGIN
+    student := StudentObj('John', 'Doe', 'Doe');
+    
+    DBMS_OUTPUT.PUT_LINE('First Name: ' || student.firstname);
+    DBMS_OUTPUT.PUT_LINE('Father Name: ' || student.fathername);
+    DBMS_OUTPUT.PUT_LINE('Mother Name: ' || student.mothername);
+    DBMS_OUTPUT.PUT_LINE('Age: ' || student.getAge()); 
+END;
+/

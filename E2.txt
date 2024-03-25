@@ -1,0 +1,22 @@
+create table accounts
+(accno int, 
+name varchar(10) not null, 
+acctype char(5), 
+balance int,
+date_open date,
+mobile_no int);
+
+ create sequence sq_accno start with 1234567890;
+
+ insert into accounts values(sq_accno.nextval,'rebdo','s',6000,'17-jun-2022',7392828726);
+
+ insert into accounts values(sq_accno.nextval,'Mary','s',7200,'13-jun-2022',9786251762);
+
+ insert into accounts values(sq_accno.nextval,'sam','s',400,'21-apr-2023',7564896523);
+
+ CREATE INDEX ind_accno ON accounts(name);
+
+ SELECT index_name, table_name, column_name
+    FROM user_ind_columns
+    WHERE table_name = 'ACCOUNTS';
+ select*from accounts;

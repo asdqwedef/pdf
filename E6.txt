@@ -1,0 +1,12 @@
+create or replace procedure dgtword(x number) is word varchar(20);
+begin
+select decode 
+(x,0,'Zero',1,'One',2,'Two',3,'Three',4,'Four',5,'Five',6,'Six
+',7,'Seven',8,'Eight',9,'Nine','not a single digit number') into word from dual;
+DBMS_OUTPUT.PUT_LINE(x||'in words'||word);
+end;
+/
+
+ set serverout on;
+
+ execute dgtword(9);

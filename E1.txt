@@ -1,0 +1,25 @@
+create table employe(
+empid int,name varchar(10),
+position varchar(10),
+DOB date,
+DOJ date,
+address varchar(10),
+phoneno int,
+salary int,
+commission int,
+supervisor_id int);
+
+ INSERT INTO employe VALUES
+(21344, 'John', 'Manager', '17-jun-2003', '13-jun-2023', '4/87Tamilnadu', '7356228901', 50000, 2000, 21344);
+
+
+ alter table employe add constraint pk primary key(empno);
+
+ alter table employe add constraint chk_doj check(DOJ>DOB);
+
+ alter table employe add constraint chk_sal check(salary>commission);
+
+ alter table employe add constraint con_fk foreign key(supervisor_id) references employe(empid);
+
+  select constraint_name,constraint_type from user_constraints where table_name = 'EMPLOYE';
+ alter table employe drop constraint chk_sal;

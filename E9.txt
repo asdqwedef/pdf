@@ -1,0 +1,22 @@
+CREATE TABLE staff_details (
+    staff_id NUMBER PRIMARY KEY,
+    staff_name VARCHAR2(100),
+    department VARCHAR2(100),
+    salary NUMBER
+);
+
+INSERT INTO staff_details (staff_id, staff_name, department, salary) VALUES (1, 'John Doe', 'HR', 50000);
+INSERT INTO staff_details (staff_id, staff_name, department, salary) VALUES (2, 'Jane Smith', 'Finance', 60000);
+INSERT INTO staff_details (staff_id, staff_name, department, salary) VALUES (3, 'Mike Johnson', 'IT', 70000);
+INSERT INTO staff_details (staff_id, staff_name, department, salary) VALUES (4, 'Emily Brown', 'Marketing', 55000);
+
+
+CREATE VIEW staff_view AS
+SELECT * FROM staff_details;
+
+CREATE OR REPLACE TRIGGER staff_view_trigger
+INSTEAD OF INSERT OR UPDATE OR DELETE ON staff_view
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Changes were made to the staff view.');
+END;
+/

@@ -1,0 +1,29 @@
+CREATE TABLE EMPL(
+EmployeeID NUMBER,
+EmployeeName VARCHAR(20),
+Department VARCHAR(20),
+Salary NUMBER)
+PARTITION BY RANGE(Salary)
+(PARTITION P1 VALUES LESS THAN (10000),
+PARTITION P2 VALUES LESS THAN (20000),
+PARTITION P3 VALUES LESS THAN (35000),
+PARTITION P4 VALUES LESS THAN (80000));
+
+INSERT INTO EMPL VALUES (2345, 'John', 'Production', 9000);
+INSERT INTO EMPL VALUES (3456, 'Jane', 'Sales', 15000);
+INSERT INTO EMPS VALUES (2987, 'Bob', 'Marketing', 30000);
+ 
+ SELECT 
+ EmployeeName, 
+ Department, 
+ Salary, 
+ AVG(Salary) OVER (PARTITION BY Department) AS AvgSalary
+ FROM 
+ EMPL;
+
+ SELECT EmployeeID,
+ EmployeeName, 
+ Department, Salary,
+ COUNT(*) OVER (PARTITION BY Department) AS EmployeeCount,
+ SUM(Salary) OVER (PARTITION BY Department) AS DepartmentSalary
+ FROM EMPL;

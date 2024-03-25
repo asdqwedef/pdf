@@ -1,0 +1,35 @@
+CREATE TABLE salaries (  
+    emp_num INT,  
+    valid_from DATE,  
+    amount int);
+
+INSERT INTO salaries VALUES  
+(102, '15-jun-2003', 45000);
+INSERT INTO salaries VALUES  
+(103, '19-apr-2007', 65000);  
+INSERT INTO salaries VALUES 
+(105, '20-sep-2010', 55000);
+INSERT INTO salaries VALUES 
+(107, '25-feb-2011', 70000); 
+INSERT INTO salaries VALUES 
+(109, '20-dec-2020', 40000);  
+
+CREATE TABLE salary_archives (
+id INT ,  
+emp_num INT,  
+valid_from DATE,  
+amount int);
+
+CREATE OR REPLACE TRIGGER before_delete_salaries
+BEFORE DELETE
+ON salaries FOR EACH ROW
+BEGIN
+    INSERT INTO salary_archives (emp_num, valid_from, amount)
+    VALUES(:OLD.emp_num, :OLD.valid_from, :OLD.amount);
+END;
+/
+
+
+DELETE FROM salaries WHERE emp_num = 105;  
+
+SELECT * FROM salary_archives;

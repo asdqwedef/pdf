@@ -1,0 +1,30 @@
+create table suppliers
+(supplier_id number,
+supplier_name varchar2(4000),
+supplier_address varchar2(4000));
+
+create table orders
+(order_no number,
+supplier_id number,
+quantity number,price number);
+insert into suppliers values(2125,'Ram','Ram gomm house');
+insert into suppliers values(2465,'peter','pete villa');
+insert into orders values(1000,2255,85,850);
+insert into orders values(2000,2465,22,220);
+
+create view sup_orders as 
+select suppliers.supplier_id,orders.quantity,orders.price 
+from suppliers
+inner join orders
+on suppliers.supplier_id = orders.supplier_id;
+
+create view sup_orders2 as 
+select suppliers.supplier_id,orders.quantity,orders.price 
+from suppliers
+inner join orders
+on suppliers.supplier_id = orders.supplier_id
+where suppliers.supplier_name = 'peter';
+
+select*from sup_orders2;
+
+select*from sup_orders;
